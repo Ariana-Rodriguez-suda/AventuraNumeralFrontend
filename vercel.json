@@ -1,0 +1,7 @@
+@"
+{
+    "cleanUrls": true,
+    "trailingSlash": false
+}
+"@ | Out-File -FilePath vercel.json -Encoding UTF8
+
