@@ -70,6 +70,7 @@
     <Content Include="dashboard.html" />
     <Content Include="estudiantes.html" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
     <Content Include="login.html" />
     <Content Include="logo.png" />
     <Content Include="Web.config" />
