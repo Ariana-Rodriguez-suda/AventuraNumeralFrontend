@@ -88,6 +88,27 @@
             margin-bottom: 25px;
             font-weight: 600;
             font-size: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #create-class-btn {
+            background: linear-gradient(135deg, #d4a74f 0%, #c49848 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(212, 167, 79, 0.3);
+            transition: all 0.3s ease;
+        }
+        #create-class-btn:hover {
+            background: linear-gradient(135deg, #c49848 0%, #d4a74f 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(212, 167, 79, 0.4);
         }
         .class-card {
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
@@ -186,7 +207,7 @@
             if (user) {
                 document.getElementById('teacher-name').textContent = user.displayName || user.email.split('@')[0];
                 document.getElementById('teacher-email').textContent = user.email;
-                await loadTeacherData(user.email);
+                await loadTeacherData(user.email, user.displayName);
             } else {
                 window.location.href = 'login.html';
             }
@@ -197,31 +218,38 @@
             window.location.href = 'login.html';
         });
 
-        async function loadTeacherData(email) {
+        async function loadTeacherData(email, displayName) {
             try {
-                const response = await fetch(`${API_URL}/teacher/by-email/${encodeURIComponent(email)}`);
+                // Auto-crear o obtener maestro
+                const autoCreateResponse = await fetch(`${API_URL}/teachers/auto-create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        name: displayName || email.split('@')[0]
+                    })
+                });
                 
-                if (!response.ok) {
+                if (!autoCreateResponse.ok) {
                     document.getElementById('classes-list').innerHTML = `
                         <div style="text-align: center; padding: 40px;">
-                            <h3 style="color: #d32f2f;">Profesor no encontrado</h3>
-                            <p style="color: #666;">Tu email (${email}) no está registrado en el sistema.</p>
-                            <p style="color: #666;">Contacta al administrador.</p>
+                            <h3 style="color: #d32f2f;">❌ Error al crear profesor</h3>
+                            <p style="color: #666;">No se pudo crear o acceder a tu cuenta.</p>
                         </div>
                     `;
                     return;
                 }
                 
-                const data = await response.json();
+                const data = await autoCreateResponse.json();
                 currentTeacher = data.teacher;
                 displayClasses(currentTeacher.classes);
             } catch (error) {
                 console.error("Error cargando datos:", error);
                 document.getElementById('classes-list').innerHTML = `
                     <div style="text-align: center; padding: 40px;">
-                        <h3 style="color: #d32f2f;">Error de conexión</h3>
+                        <h3 style="color: #d32f2f;">❌ Error de conexión</h3>
                         <p style="color: #666;">No se pudo conectar con el servidor.</p>
-                        <p style="color: #666;">Asegúrate de que el backend esté corriendo.</p>
+                        <p style="color: #666;">Verifica que el backend esté en línea.</p>
                     </div>
                 `;
             }
@@ -230,17 +258,22 @@
         function displayClasses(classes) {
             const container = document.getElementById('classes-list');
             
+            container.innerHTML = `
+                <h2>
+                    <span>Mis Clases</span>
+                    <button id="create-class-btn" onclick="createNewClass()">➕ Nueva Clase</button>
+                </h2>
+            `;
+            
             if (classes.length === 0) {
-                container.innerHTML = `
-                    <h2>Mis Clases</h2>
-                    <div style="text-align: center; padding: 40px; color: #666;">
-                        <p>No tienes clases asignadas todavía.</p>
-                    </div>
-                `;
+                const emptyDiv = document.createElement('div');
+                emptyDiv.style.textAlign = 'center';
+                emptyDiv.style.padding = '40px';
+                emptyDiv.style.color = '#666';
+                emptyDiv.innerHTML = '<p>No tienes clases asignadas todavía. ¡Crea tu primera clase!</p>';
+                container.appendChild(emptyDiv);
                 return;
             }
-
-            container.innerHTML = '<h2>Mis Clases</h2>';
             
             classes.forEach(cls => {
                 const classDiv = document.createElement('div');
@@ -256,6 +289,42 @@
                 container.appendChild(classDiv);
             });
         }
+        
+        window.createNewClass = async function() {
+            if (!currentTeacher) {
+                alert('❌ Error: No se pudo obtener la información del maestro');
+                return;
+            }
+            
+            const className = prompt('🏫 Ingresa el nombre de la nueva clase:\n(Ejemplo: "Sexto Básica A", "5to Grado")');
+            
+            if (!className || className.trim() === '') return;
+            
+            const accessCode = prompt('🔑 Ingresa un código de acceso (opcional):\n(Los estudiantes usarán este código para unirse)');
+            
+            try {
+                const response = await fetch(`${API_URL}/classes`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        teacher_id: currentTeacher.id,
+                        class_name: className.trim(),
+                        access_code: accessCode && accessCode.trim() !== '' ? accessCode.trim() : null
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('✅ ¡Clase creada exitosamente!');
+                    location.reload();
+                } else {
+                    const errorData = await response.json();
+                    alert('❌ Error al crear la clase: ' + (errorData.error || 'Error desconocido'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('❌ Error de conexión al crear la clase');
+            }
+        };
     </script>
 </body>
 </html>
