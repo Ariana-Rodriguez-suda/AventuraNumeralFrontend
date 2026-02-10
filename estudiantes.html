@@ -11,35 +11,42 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: #f0f4f8;
         }
+
         .header {
             background: linear-gradient(135deg, #1e3a5f 0%, #2a5178 100%);
             color: white;
             padding: 20px 40px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .header-left {
             display: flex;
             align-items: center;
             gap: 15px;
         }
+
         .header-logo {
             height: 45px;
             width: auto;
         }
+
         .header h1 {
             font-size: 24px;
             font-weight: 600;
             letter-spacing: -0.5px;
         }
+
         .back-btn {
             background: rgba(255,255,255,0.15);
             color: white;
@@ -53,16 +60,19 @@
             font-weight: 500;
             font-family: 'Poppins', sans-serif;
         }
-        .back-btn:hover {
-            background: rgba(255,255,255,0.25);
-            border-color: rgba(255,255,255,0.5);
-            transform: translateY(-2px);
-        }
+
+            .back-btn:hover {
+                background: rgba(255,255,255,0.25);
+                border-color: rgba(255,255,255,0.5);
+                transform: translateY(-2px);
+            }
+
         .container {
             max-width: 1200px;
             margin: 35px auto;
             padding: 0 20px;
         }
+
         .section {
             background: white;
             padding: 35px;
@@ -70,12 +80,14 @@
             margin-bottom: 30px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-        .section h2 {
-            color: #1e3a5f;
-            margin-bottom: 25px;
-            font-weight: 600;
-            font-size: 22px;
-        }
+
+            .section h2 {
+                color: #1e3a5f;
+                margin-bottom: 25px;
+                font-weight: 600;
+                font-size: 22px;
+            }
+
         .student-card {
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             border: 2px solid #e8ecf0;
@@ -84,53 +96,61 @@
             border-radius: 14px;
             transition: all 0.3s ease;
         }
-        .student-card:hover {
-            box-shadow: 0 8px 25px rgba(30, 58, 95, 0.12);
-            transform: translateY(-2px);
-            border-color: #d4a74f;
-        }
-        .student-card h3 {
-            color: #1e3a5f;
-            margin-bottom: 12px;
-            font-weight: 600;
-            font-size: 19px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .student-card p {
-            color: #5a7a4d;
-            margin: 8px 0;
-            font-size: 14px;
-        }
-        .student-card button {
-            background: linear-gradient(135deg, #5a7a4d 0%, #6a8a5d 100%);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-right: 10px;
-            margin-top: 12px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            box-shadow: 0 4px 12px rgba(90, 122, 77, 0.3);
-        }
-        .student-card button:hover {
-            background: linear-gradient(135deg, #6a8a5d 0%, #5a7a4d 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(90, 122, 77, 0.4);
-        }
-        .student-card button.secondary {
-            background: linear-gradient(135deg, #d4a74f 0%, #c49848 100%);
-            box-shadow: 0 4px 12px rgba(212, 167, 79, 0.3);
-        }
-        .student-card button.secondary:hover {
-            background: linear-gradient(135deg, #c49848 0%, #d4a74f 100%);
-            box-shadow: 0 6px 18px rgba(212, 167, 79, 0.4);
-        }
+
+            .student-card:hover {
+                box-shadow: 0 8px 25px rgba(30, 58, 95, 0.12);
+                transform: translateY(-2px);
+                border-color: #d4a74f;
+            }
+
+            .student-card h3 {
+                color: #1e3a5f;
+                margin-bottom: 12px;
+                font-weight: 600;
+                font-size: 19px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .student-card p {
+                color: #5a7a4d;
+                margin: 8px 0;
+                font-size: 14px;
+            }
+
+            .student-card button {
+                background: linear-gradient(135deg, #5a7a4d 0%, #6a8a5d 100%);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 10px;
+                cursor: pointer;
+                margin-right: 10px;
+                margin-top: 12px;
+                transition: all 0.3s ease;
+                font-weight: 500;
+                font-family: 'Poppins', sans-serif;
+                font-size: 13px;
+                box-shadow: 0 4px 12px rgba(90, 122, 77, 0.3);
+            }
+
+                .student-card button:hover {
+                    background: linear-gradient(135deg, #6a8a5d 0%, #5a7a4d 100%);
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 18px rgba(90, 122, 77, 0.4);
+                }
+
+                .student-card button.secondary {
+                    background: linear-gradient(135deg, #d4a74f 0%, #c49848 100%);
+                    box-shadow: 0 4px 12px rgba(212, 167, 79, 0.3);
+                }
+
+                    .student-card button.secondary:hover {
+                        background: linear-gradient(135deg, #c49848 0%, #d4a74f 100%);
+                        box-shadow: 0 6px 18px rgba(212, 167, 79, 0.4);
+                    }
+
         .attempt-card {
             background: linear-gradient(135deg, #f8fdf9 0%, #ffffff 100%);
             padding: 20px;
@@ -140,15 +160,18 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
         }
-        .attempt-card:hover {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transform: translateX(4px);
-        }
-        .attempt-card p {
-            margin: 6px 0;
-            font-size: 14px;
-            color: #2a4a3d;
-        }
+
+            .attempt-card:hover {
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                transform: translateX(4px);
+            }
+
+            .attempt-card p {
+                margin: 6px 0;
+                font-size: 14px;
+                color: #2a4a3d;
+            }
+
         .label-badge {
             display: inline-block;
             background: linear-gradient(135deg, #d4a74f 0%, #c49848 100%);
@@ -160,6 +183,7 @@
             font-weight: 500;
             box-shadow: 0 3px 10px rgba(212, 167, 79, 0.3);
         }
+
         .loading {
             text-align: center;
             padding: 40px;
@@ -181,7 +205,24 @@
 
     <div class="container">
         <div class="section" id="students-section">
-            <h2>Lista de Estudiantes</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <h2 style="margin: 0;">Lista de Estudiantes</h2>
+                <button onclick="createStudent()" style="
+                    background: linear-gradient(135deg, #1e3a5f 0%, #2a5178 100%);
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-family: 'Poppins', sans-serif;
+                    font-size: 14px;
+                    box-shadow: 0 4px 12px rgba(30, 58, 95, 0.3);
+                    transition: all 0.3s ease;
+                ">
+                    + Crear Estudiante
+                </button>
+            </div>
             <div class="loading">Cargando estudiantes...</div>
         </div>
 
@@ -222,14 +263,14 @@
                 window.location.href = 'login.html';
                 return;
             }
-            
+
             if (classId) {
                 await loadStudents(classId);
             } else {
                 document.getElementById('students-section').innerHTML = `
-                    <h2>Error</h2>
-                    <p style="color: #d32f2f;">No se especificó una clase.</p>
-                `;
+                        <h2>Error</h2>
+                        <p style="color: #d32f2f;">No se especificó una clase.</p>
+                    `;
             }
         });
 
@@ -237,79 +278,79 @@
             try {
                 const response = await fetch(`${API_URL}/classes/${classId}/students`);
                 const data = await response.json();
-                
+
                 const container = document.getElementById('students-section');
-                
+
                 if (data.students.length === 0) {
                     container.innerHTML = `
-                        <h2>Lista de Estudiantes</h2>
-                        <div style="text-align: center; padding: 40px; color: #666;">
-                            <p>No hay estudiantes en esta clase todavía.</p>
-                        </div>
-                    `;
+                            <h2>Lista de Estudiantes</h2>
+                            <div style="text-align: center; padding: 40px; color: #666;">
+                                <p>No hay estudiantes en esta clase todavía.</p>
+                            </div>
+                        `;
                     return;
                 }
 
                 container.innerHTML = '<h2>Lista de Estudiantes</h2>';
-                
+
                 data.students.forEach(student => {
                     const studentDiv = document.createElement('div');
                     studentDiv.className = 'student-card';
                     studentDiv.innerHTML = `
-                        <h3>👤 ${student.student_name}</h3>
-                        <p><strong>Intentos completados:</strong> ${student._count.attempts}</p>
-                        ${student.label ? `<span class="label-badge">🏷️ ${student.label}</span>` : ''}
-                        <div>
-                            <button onclick="loadAttempts(${student.id}, '${student.student_name}')">
-                                Ver Intentos
-                            </button>
-                            <button class="secondary" onclick="tagStudent(${student.id}, '${student.student_name}')">
-                                Agregar Etiqueta
-                            </button>
-                        </div>
-                    `;
+                            <h3>👤 ${student.student_name}</h3>
+                            <p><strong>Intentos completados:</strong> ${student._count.attempts}</p>
+                            ${student.label ? `<span class="label-badge">🏷️ ${student.label}</span>` : ''}
+                            <div>
+                                <button onclick="loadAttempts(${student.id}, '${student.student_name}')">
+                                    Ver Intentos
+                                </button>
+                                <button class="secondary" onclick="tagStudent(${student.id}, '${student.student_name}')">
+                                    Agregar Etiqueta
+                                </button>
+                            </div>
+                        `;
                     container.appendChild(studentDiv);
                 });
             } catch (error) {
                 console.error("Error cargando estudiantes:", error);
                 document.getElementById('students-section').innerHTML = `
-                    <h2>Error</h2>
-                    <p style="color: #d32f2f;">Error al cargar los estudiantes.</p>
-                `;
+                        <h2>Error</h2>
+                        <p style="color: #d32f2f;">Error al cargar los estudiantes.</p>
+                    `;
             }
         }
 
-        window.loadAttempts = async function(studentId, studentName) {
+        window.loadAttempts = async function (studentId, studentName) {
             try {
                 const response = await fetch(`${API_URL}/students/${studentId}/attempts`);
                 const data = await response.json();
-                
+
                 const section = document.getElementById('attempts-section');
                 const titleElement = document.getElementById('attempts-title');
                 const container = document.getElementById('attempts-list');
-                
+
                 titleElement.textContent = `Intentos de ${studentName}`;
                 section.style.display = 'block';
-                
+
                 if (data.attempts.length === 0) {
                     container.innerHTML = '<p style="color: #666;">Este estudiante no tiene intentos registrados.</p>';
                     section.scrollIntoView({ behavior: 'smooth' });
                     return;
                 }
-                
+
                 container.innerHTML = '';
-                
+
                 data.attempts.forEach((attempt, index) => {
                     const attemptDiv = document.createElement('div');
                     attemptDiv.className = 'attempt-card';
                     attemptDiv.innerHTML = `
-                        <p><strong>Intento ${data.attempts.length - index}</strong></p>
-                        <p><strong>Nivel:</strong> ${attempt.level_name}</p>
-                        <p><strong>⏱️ Tiempo total:</strong> ${attempt.time_elapsed.toFixed(2)} segundos</p>
-                        <p><strong>⏱️ Tiempo en checkpoint:</strong> ${attempt.checkpoint_time ? attempt.checkpoint_time.toFixed(2) + ' segundos' : 'N/A'}</p>
-                        <p><strong>✅ Completó checkpoint:</strong> ${attempt.reached_checkpoint ? 'Sí' : 'No'}</p>
-                        <p><strong>📅 Fecha:</strong> ${new Date(attempt.created_at).toLocaleString('es-ES')}</p>
-                    `;
+                            <p><strong>Intento ${data.attempts.length - index}</strong></p>
+                            <p><strong>Nivel:</strong> ${attempt.level_name}</p>
+                            <p><strong>⏱️ Tiempo total:</strong> ${attempt.time_elapsed.toFixed(2)} segundos</p>
+                            <p><strong>⏱️ Tiempo en checkpoint:</strong> ${attempt.checkpoint_time ? attempt.checkpoint_time.toFixed(2) + ' segundos' : 'N/A'}</p>
+                            <p><strong>✅ Completó checkpoint:</strong> ${attempt.reached_checkpoint ? 'Sí' : 'No'}</p>
+                            <p><strong>📅 Fecha:</strong> ${new Date(attempt.created_at).toLocaleString('es-ES')}</p>
+                        `;
                     container.appendChild(attemptDiv);
                 });
 
@@ -319,23 +360,48 @@
             }
         };
 
-        window.tagStudent = async function(studentId, studentName) {
+        window.tagStudent = async function (studentId, studentName) {
             const label = prompt(`Ingresa una etiqueta para ${studentName}:\n(Ejemplo: "Excelente progreso", "Necesita ayuda", "Buen desempeño")`);
-            
+
             if (!label || label.trim() === '') return;
-            
+
             try {
                 const response = await fetch(`${API_URL}/students/${studentId}/label`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ label: label.trim() })
                 });
-                
+
                 if (response.ok) {
                     alert("✅ Etiqueta actualizada correctamente!");
                     location.reload();
                 } else {
                     alert("❌ Error al actualizar la etiqueta");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("❌ Error de conexión");
+            }
+        };
+
+        window.createStudent = async function () {
+            const studentName = prompt(`Ingresa el nombre del nuevo estudiante para la clase "${className}":`);
+
+            if (!studentName || studentName.trim() === '') return;
+
+            try {
+                const response = await fetch(`${API_URL}/classes/${classId}/students`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ student_name: studentName.trim() })
+                });
+
+                if (response.ok) {
+                    alert("✅ Estudiante creado correctamente!");
+                    location.reload();
+                } else {
+                    const data = await response.json();
+                    alert(`❌ Error: ${data.error || 'Error al crear estudiante'}`);
                 }
             } catch (error) {
                 console.error("Error:", error);
