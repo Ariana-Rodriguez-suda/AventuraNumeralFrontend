@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudiantes - Aventura Numeral</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -228,6 +229,15 @@
 
         <div class="section" id="attempts-section" style="display: none;">
             <h2 id="attempts-title">Intentos del Estudiante</h2>
+            <div id="chart-container" style="display: none; margin-bottom: 30px;">
+                <h3 style="color: #1e3a5f; margin-bottom: 15px; font-size: 18px;">📊 Histograma de Mejora</h3>
+                <div style="position: relative; height: 320px; width: 100%;">
+                    <canvas id="improvement-chart"></canvas>
+                </div>
+                <p style="text-align: center; color: #7a8a9a; font-size: 12px; margin-top: 10px;">
+                    Barras más bajas = mejor tiempo. Verde = completó checkpoint, Naranja = no completó.
+                </p>
+            </div>
             <div id="attempts-list"></div>
         </div>
     </div>
@@ -377,16 +387,105 @@
                 const section = document.getElementById('attempts-section');
                 const titleElement = document.getElementById('attempts-title');
                 const container = document.getElementById('attempts-list');
+                const chartContainer = document.getElementById('chart-container');
 
                 titleElement.textContent = `Intentos de ${studentName}`;
                 section.style.display = 'block';
 
                 if (data.attempts.length === 0) {
                     container.innerHTML = '<p style="color: #666;">Este estudiante no tiene intentos registrados.</p>';
+                    chartContainer.style.display = 'none';
                     section.scrollIntoView({ behavior: 'smooth' });
                     return;
                 }
 
+                // === HISTOGRAMA ===
+                chartContainer.style.display = 'block';
+                const sortedAttempts = [...data.attempts].reverse(); // cronológico (más antiguo primero)
+                const labels = sortedAttempts.map((_, i) => `Intento ${i + 1}`);
+                const times = sortedAttempts.map(a => a.time_elapsed);
+                const colors = sortedAttempts.map(a => a.reached_checkpoint ? 'rgba(90, 122, 77, 0.8)' : 'rgba(212, 167, 79, 0.8)');
+                const borderColors = sortedAttempts.map(a => a.reached_checkpoint ? 'rgba(90, 122, 77, 1)' : 'rgba(212, 167, 79, 1)');
+
+                // Destruir chart anterior si existe
+                const canvas = document.getElementById('improvement-chart');
+                if (window._improvementChart) {
+                    window._improvementChart.destroy();
+                }
+
+                window._improvementChart = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Tiempo (segundos)',
+                            data: times,
+                            backgroundColor: colors,
+                            borderColor: borderColors,
+                            borderWidth: 2,
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    afterLabel: function(context) {
+                                        const attempt = sortedAttempts[context.dataIndex];
+                                        const lines = [
+                                            `Nivel: ${attempt.level_name}`,
+                                            `Checkpoint: ${attempt.reached_checkpoint ? 'Sí' : 'No'}`,
+                                            `Fecha: ${new Date(attempt.created_at).toLocaleDateString('es-ES')}`
+                                        ];
+                                        if (attempt.coins_collected) lines.push(`Monedas: ${attempt.coins_collected}`);
+                                        if (attempt.stars_earned) lines.push(`Estrellas: ${attempt.stars_earned}`);
+                                        return lines;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Tiempo (segundos)',
+                                    font: { family: 'Poppins', size: 13, weight: '600' },
+                                    color: '#1e3a5f'
+                                },
+                                ticks: {
+                                    font: { family: 'Poppins', size: 11 },
+                                    color: '#5a7a9a'
+                                },
+                                grid: {
+                                    color: 'rgba(0,0,0,0.06)'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Intentos (cronológico)',
+                                    font: { family: 'Poppins', size: 13, weight: '600' },
+                                    color: '#1e3a5f'
+                                },
+                                ticks: {
+                                    font: { family: 'Poppins', size: 11 },
+                                    color: '#5a7a9a'
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // === TARJETAS DE INTENTOS ===
                 container.innerHTML = '';
 
                 data.attempts.forEach((attempt, index) => {
